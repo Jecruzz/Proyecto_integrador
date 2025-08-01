@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNet - Crear Evento</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">PlanNet</div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'events' %}">Mis Eventos</a></li>
+                    <li><a href="{% url 'create_event' %}">Crear Evento</a></li>
+                    <li><a href="{% url 'profile' %}">Perfil</a></li>
+                </ul>
+                <div class="user-info">
+                    <span>Cargando...</span>
+                    <button class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Crear Nuevo Evento</h1>
+                <p>Completa la información de tu evento</p>
+            </div>
+
+            <form class="create-event-form" id="createEventForm">
+                <div class="form-group">
+                    <label for="title">Título del Evento</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Fecha</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Hora</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Ubicación</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        Crear Evento
+                    </button>
+                    <a href="events.html" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    
+</body>
+</html>

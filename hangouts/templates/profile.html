@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNet - Mi Perfil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">PlanNet</div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'events' %}">Mis Eventos</a></li>
+                    <li><a href="{% url 'create_event' %}">Crear Evento</a></li>
+                    <li><a href="{% url 'profile' %}">Perfil</a></li>
+                </ul>
+                <div class="user-info">
+                    <span>Cargando...</span>
+                    <button class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">JP</div>
+                        <h2 id="profileName">Juan Pérez</h2>
+                        <p id="profileEmail">juan@email.com</p>
+                    </div>
+
+                    <div class="profile-info">
+                        <div class="form-group">
+                            <label for="userName">Nombre Completo</label>
+                            <input type="text" id="userName" value="Juan Pérez" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userEmail">Correo Electrónico</label>
+                            <input type="email" id="userEmail" value="juan@email.com" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userPhone">Teléfono</label>
+                            <input type="tel" id="userPhone" placeholder="Agregar teléfono" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userBio">Biografía</label>
+                            <textarea id="userBio" placeholder="Cuéntanos sobre ti..." readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="joinDate">Miembro desde</label>
+                            <input type="text" id="joinDate" value="Enero 2025" readonly>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <button class="btn btn-primary" onclick="showNotification('Función de edición en desarrollo', 'info')">
+                            Editar Perfil
+                        </button>
+                        <button class="btn btn-secondary" onclick="showNotification('Función de configuración en desarrollo', 'info')">
+                            Configuración
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>

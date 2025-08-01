@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNet - Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+    <div class="container">
+        <nav class="nav">
+            <div class="logo">
+                <a href="{% url 'index' %}">PlanNet</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'events' %}">Mis Eventos</a></li>
+                <li><a href="{% url 'create_event' %}">Crear Evento</a></li>
+                <li><a href="{% url 'profile' %}">Perfil</a></li>
+            </ul>
+            <div class="user-info">
+                <span>{{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Panel de Control</h1>
+                <p>Gestiona todos tus eventos desde aquí</p>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number" data-stat="total-events">0</div>
+                    <div class="stat-label">Total de Eventos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-stat="upcoming-events">0</div>
+                    <div class="stat-label">Próximos Eventos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-stat="month-events">0</div>
+                    <div class="stat-label">Este Mes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Soporte</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 style="color: white; margin-bottom: 2rem;">Eventos Recientes</h2>
+                <div class="events-grid" id="recentEvents">
+                    <!-- Los eventos se cargarán dinámicamente -->
+                </div>
+            </div>
+
+            <div class="text-center mt-2">
+                <a href="create-event.html" class="btn btn-primary">
+                    Crear Nuevo Evento
+                </a>
+                <a href="events.html" class="btn btn-secondary">
+                    Ver Todos los Eventos
+                </a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

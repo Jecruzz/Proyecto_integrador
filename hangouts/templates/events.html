@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNet - Mis Eventos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">PlanNet</div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'events' %}">Mis Eventos</a></li>
+                    <li><a href="{% url 'create_event' %}">Crear Evento</a></li>
+                    <li><a href="{% url 'profile' %}">Perfil</a></li>
+                </ul>
+                <div class="user-info">
+                    <span>Cargando...</span>
+                    <button class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Mis Eventos</h1>
+                <p>Administra y organiza todos tus eventos</p>
+            </div>
+
+            <div class="text-center mb-2">
+                <a href="create-event.html" class="btn btn-primary">
+                    + Nuevo Evento
+                </a>
+            </div>
+
+            <div class="events-grid" id="eventsGrid">
+                <!-- Los eventos se cargarán dinámicamente -->
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>
