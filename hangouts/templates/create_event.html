@@ -19,7 +19,7 @@
                     <li><a href="{% url 'profile' %}">Perfil</a></li>
                 </ul>
                 <div class="user-info">
-                    <span>Cargando...</span>
+                    
                     <button class="btn btn-secondary logout-btn">Cerrar Sesión</button>
                 </div>
             </nav>
@@ -33,45 +33,40 @@
                 <p>Completa la información de tu evento</p>
             </div>
 
-            <form class="create-event-form" id="createEventForm">
-                <div class="form-group">
-                    <label for="title">Título del Evento</label>
-                    <input type="text" id="title" name="title" required>
-                </div>
+<form method="POST" class="form-card create-event-form">
+    {% csrf_token %}
 
-                <div class="form-group">
-                    <label for="description">Descripción</label>
-                    <textarea id="description" name="description" required></textarea>
-                </div>
+    <div class="form-group">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+    </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="date">Fecha</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Hora</label>
-                        <input type="time" id="time" name="time" required>
-                    </div>
-                </div>
+    <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+    </div>
 
-                <div class="form-group">
-                    <label for="location">Ubicación</label>
-                    <input type="text" id="location" name="location" required>
-                </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+        </div>
+    </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
-                        Crear Evento
-                    </button>
-                    <a href="events.html" class="btn btn-secondary">
-                        Cancelar
-                    </a>
-                </div>
-            </form>
+    <div class="form-group">
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Guardar Evento</button>
+</form>
         </div>
     </main>
 
-    
+  <script src="{% static 'js/script.js' %}"></script>  
 </body>
 </html>

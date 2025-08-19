@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from hangouts import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('hangouts.urls')),
+    path('register', views.register_view, name='register'),
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    
 ]
 
 

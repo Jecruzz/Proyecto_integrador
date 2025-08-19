@@ -30,21 +30,78 @@
         <div class="container">
             <div class="dashboard-header">
                 <h1>Mis Eventos</h1>
+
+                <!-- Formulario de combinaciones y permutaciones -->
+                <form method="POST" action="{% url 'events' %}" class="form-card max-w-sm mb-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="calc" value="1">
+
+                    <h2>Combinaciones y Permutaciones</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="calc_n">N (elementos)</label>
+                            <input type="number" id="calc_n" name="n" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc_r">R (tomados)</label>
+                            <input type="number" id="calc_r" name="r" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calc_tipo">Tipo</label>
+                        <select id="calc_tipo" name="tipo" class="w-full">
+                            <option value="combinacion">Combinaciones C(n,r)</option>
+                            <option value="permutacion">Permutaciones P(n,r)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Calcular</button>
+
+                    <!-- Resultado o error -->
+                    <div style="min-height: 50px; margin-top: 0.5rem;">
+                        {% if calc_error %}
+                            <div class="form-error mt-2">{{ calc_error }}</div>
+                        {% endif %}
+
+                        {% if calc %}
+                            <div class="alert alert-info mt-2">
+                                Resultado: <strong>{{ calc.valor }}</strong><br>
+                                {% if calc.tipo == 'combinacion' %}
+                                    Fórmula: C(n,r) = n! / (r!(n−r)!) con n={{ calc.n }}, r={{ calc.r }}.
+                                {% else %}
+                                    Fórmula: P(n,r) = n! / (n−r)! con n={{ calc.n }}, r={{ calc.r }}.
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </form>
+
                 <p>Administra y organiza todos tus eventos</p>
             </div>
 
             <div class="text-center mb-2">
-                <a href="create-event.html" class="btn btn-primary">
-                    + Nuevo Evento
-                </a>
+                <a href="{% url 'create_event' %}" class="btn btn-primary">+ Nuevo Evento</a>
             </div>
 
+            <!-- Lista de eventos -->
             <div class="events-grid" id="eventsGrid">
-                <!-- Los eventos se cargarán dinámicamente -->
+                {% for evento in eventos %}
+                    <div class="event-card">
+                        <div class="event-date">{{ evento.fecha }} | {{ evento.hora }}</div>
+                        <div class="event-title">{{ evento.titulo }}</div>
+                        <div class="event-description">{{ evento.descripcion }}</div>
+                        <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
+                        <small>Creado el {{ evento.creado_en|date:"d M Y H:i" }}</small>
+                    </div>
+                {% empty %}
+                    
+                {% endfor %}
             </div>
         </div>
     </main>
 
-
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

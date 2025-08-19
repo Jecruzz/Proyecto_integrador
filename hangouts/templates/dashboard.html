@@ -12,7 +12,7 @@
     <div class="container">
         <nav class="nav">
             <div class="logo">
-                <a href="{% url 'index' %}">PlanNet</a>
+                <a href="{% url 'login' %}">PlanNet</a>
             </div>
             <ul class="nav-links">
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
@@ -34,46 +34,56 @@
     <main class="main-content">
         <div class="container">
             <div class="dashboard-header">
-                <h1>Panel de Control</h1>
-                <p>Gestiona todos tus eventos desde aquí</p>
-            </div>
+    <h1>Panel de Control</h1>
+    <p>Gestiona todos tus eventos desde aquí</p>
+
+    {% if user.is_authenticated %}
+        <div class="user-details">
+            <p><strong>Usuario:</strong> {{ user.username }}</p>
+            <p><strong>Teléfono:</strong> {{ user.profile.telefono }}</p>
+            <p><strong>Fecha de ingreso:</strong> {{ user.profile.fecha_ingreso|date:"d M Y H:i" }}</p>
+        </div>
+    {% endif %}
+</div>
+
 
             <div class="dashboard-stats">
                 <div class="stat-card">
-                    <div class="stat-number" data-stat="total-events">0</div>
-                    <div class="stat-label">Total de Eventos</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" data-stat="upcoming-events">0</div>
-                    <div class="stat-label">Próximos Eventos</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" data-stat="month-events">0</div>
-                    <div class="stat-label">Este Mes</div>
-                </div>
+    <div class="stat-number">{{ total_eventos }}</div>
+    <div class="stat-label">Total de Eventos</div>
+</div>
+<div class="stat-card">
+    <div class="stat-number">{{ eventos_proximo_mes }}</div>
+    <div class="stat-label">Próximos Eventos</div>
+</div>
+<div class="stat-card">
+    <div class="stat-number">{{ eventos_mes }}</div>
+    <div class="stat-label">Este Mes</div>
+</div>
                 <div class="stat-card">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">Soporte</div>
                 </div>
             </div>
 
-            <div class="section">
-                <h2 style="color: white; margin-bottom: 2rem;">Eventos Recientes</h2>
-                <div class="events-grid" id="recentEvents">
-                    <!-- Los eventos se cargarán dinámicamente -->
+           <div class="section">
+            <h2 style="color: white; margin-bottom: 2rem;">Eventos Recientes</h2>
+            <div class="events-grid">
+            {% for evento in eventos %}
+             <div class="event-card">
+                 <div class="event-date">{{ evento.fecha }}</div>
+                 <h3 class="event-title">{{ evento.titulo }}</h3>
+                 <p class="event-description">{{ evento.descripcion }}</p>
+                    <small>{{ evento.hora }} - {{ evento.ubicacion }}</small>
                 </div>
-            </div>
+            {% empty %}
+             <p style="color: white;">No tienes eventos recientes.</p>
+            {% endfor %}
+        </div>
+    </div>
 
-            <div class="text-center mt-2">
-                <a href="create-event.html" class="btn btn-primary">
-                    Crear Nuevo Evento
-                </a>
-                <a href="events.html" class="btn btn-secondary">
-                    Ver Todos los Eventos
-                </a>
-            </div>
         </div>
     </main>
-
+    <script src="{% static 'js/script.js' %}"></script>  
 </body>
 </html>

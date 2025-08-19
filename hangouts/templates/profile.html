@@ -19,8 +19,11 @@
                     <li><a href="{% url 'profile' %}">Perfil</a></li>
                 </ul>
                 <div class="user-info">
-                    <span>Cargando...</span>
-                    <button class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary logout-btn">Cerrar Sesión</button>
+                    </form>
                 </div>
             </nav>
         </div>
@@ -31,25 +34,27 @@
             <div class="profile-container">
                 <div class="profile-card">
                     <div class="profile-header">
-                        <div class="profile-avatar">JP</div>
-                        <h2 id="profileName">Juan Pérez</h2>
-                        <p id="profileEmail">juan@email.com</p>
+                        <div class="profile-avatar">
+                            {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                        </div>
+                        <h2 id="profileName">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <p id="profileEmail">{{ user.email }}</p>
                     </div>
 
                     <div class="profile-info">
                         <div class="form-group">
                             <label for="userName">Nombre Completo</label>
-                            <input type="text" id="userName" value="Juan Pérez" readonly>
+                            <h2 id="profileName">{{ user.username }}</h2>
                         </div>
 
                         <div class="form-group">
                             <label for="userEmail">Correo Electrónico</label>
-                            <input type="email" id="userEmail" value="juan@email.com" readonly>
+                            <input type="email" id="userEmail" value="{{ user.email }}" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="userPhone">Teléfono</label>
-                            <input type="tel" id="userPhone" placeholder="Agregar teléfono" readonly>
+                           <input type="tel" id="userPhone" value="{{ user.perfil.telefono }}" readonly>
                         </div>
 
                         <div class="form-group">
@@ -59,7 +64,7 @@
 
                         <div class="form-group">
                             <label for="joinDate">Miembro desde</label>
-                            <input type="text" id="joinDate" value="Enero 2025" readonly>
+                            <input type="text" id="joinDate" value="{{ user.date_joined|date:"F Y" }}" readonly>
                         </div>
                     </div>
 
@@ -75,7 +80,5 @@
             </div>
         </div>
     </main>
-
-
 </body>
 </html>

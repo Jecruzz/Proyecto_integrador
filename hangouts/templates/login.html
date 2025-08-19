@@ -21,7 +21,8 @@
 
     <main class="main-content">
         <div class="login-container">
-            <form class="login-form" id="loginForm">
+<form method="POST" action="" class="login-form" id="loginForm">
+    {% csrf_token %}
                 <h2>Iniciar Sesión</h2>
                 
                 <div class="form-group">

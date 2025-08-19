@@ -79,11 +79,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'plannet_db',
         'USER': 'postgres',
-        'PASSWORD': '013013',
+        'PASSWORD': '0978857880',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -131,3 +132,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'index'
+LOGIN_REDIRECT_URL = 'dashboard'
